@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  loginForm: FormGroup;
+  submitted: boolean = false;
+  invalidLogin: boolean = false;
+  constructor(private formBuilder: FormBuilder, private router: Router) { }
 
-  ngOnInit() {
+  onSubmit() {
+    this.submitted = true;
+
+    if (this.loginForm.invalid) {
+      return;
+    }
+    
+    if (this.loginForm.controls.email.value == 'dhiraj@gmail.com' && this.loginForm.controls.password.value == 'password') {
+      this.router.navigate(['list-user']);
+    } else {
+      this.invalidLogin = true;
+    }
   }
 
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 }
