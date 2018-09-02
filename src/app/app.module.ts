@@ -9,7 +9,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { AppRoutingModule } from './/app-routing.module';
-
+import {UserService} from "./service/user.service";
 
 
 @NgModule({
@@ -26,7 +26,7 @@ import { AppRoutingModule } from './/app-routing.module';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

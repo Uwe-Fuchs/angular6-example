@@ -26,7 +26,7 @@ export class UserService {
     // return this.http.post(this.baseUrl, user);
   }
 
-  updateUser(user: User): Observable<any> {
+  updateUser(user: User): Observable<User> {
     return of(user);
     // return this.http.put(this.baseUrl + '/' + user.id, user);
   }

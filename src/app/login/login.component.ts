@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   invalidLogin: boolean = false;
   constructor(private formBuilder: FormBuilder, private router: Router) { }
 
-  onSubmit() {
+  onSubmit(): void {
     this.submitted = true;
 
     if (this.loginForm.invalid) {
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
