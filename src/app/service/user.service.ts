@@ -21,18 +21,20 @@ export class UserService {
   }
 
   createUser(user: User): Observable<User> {
+    user.id = USERS.length;
     USERS.push(user);
     return of(user);
     // return this.http.post(this.baseUrl, user);
   }
 
   updateUser(user: User): Observable<User> {
+    USERS.splice(user.id, 1, user);
     return of(user);
     // return this.http.put(this.baseUrl + '/' + user.id, user);
   }
 
   deleteUser(id: number): Observable<any> {
-    USERS.filter(user => user.id !== id);
+    USERS.splice(id, 1);
     return of(null as User);
     // return this.http.delete(this.baseUrl + '/' + id);
   }
