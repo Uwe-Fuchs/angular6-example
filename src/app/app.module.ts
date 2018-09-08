@@ -8,8 +8,9 @@ import { LoginComponent } from './login/login.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { ListUserComponent } from './list-user/list-user.component';
-import { AppRoutingModule } from './/app-routing.module';
-import {UserService} from "./service/user.service";
+import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from "./material.module";
+import { UserService } from "./service/user.service";
 
 
 @NgModule({
@@ -22,9 +23,10 @@ import {UserService} from "./service/user.service";
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule,
+    MaterialModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
