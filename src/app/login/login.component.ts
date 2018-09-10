@@ -1,37 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  loginForm: FormGroup;
-  submitted: boolean = false;
+  username: string;
+  password: string;
   invalidLogin: boolean = false;
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
 
-  onSubmit(): void {
-    this.submitted = true;
+  constructor(private router: Router, public dialog: MatDialog) {
+  }
 
-    if (this.loginForm.invalid) {
-      return;
-    }
+  login(): void {
     
-    if (this.loginForm.controls.email.value == 'dhiraj@gmail.com' && this.loginForm.controls.password.value == 'password') {
+    if (this.username == 'dhiraj@gmail.com' && this.password == 'password') {
       this.router.navigate(['list-user']);
     } else {
       this.invalidLogin = true;
     }
-  }
-
-  ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
-    });
   }
 }
