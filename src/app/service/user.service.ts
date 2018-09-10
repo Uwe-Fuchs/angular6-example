@@ -21,7 +21,7 @@ export class UserService {
   }
 
   createUser(user: User): Observable<User> {
-    user.id = USERS.length;
+    user.id = this.getNewUserId();
     USERS.push(user);
     return of(user);
     // return this.http.post(this.baseUrl, user);
@@ -37,5 +37,11 @@ export class UserService {
     USERS.splice(id, 1);
     return of(null as User);
     // return this.http.delete(this.baseUrl + '/' + id);
+  }
+
+  private getNewUserId(): number {
+    let maxIndex = -1;
+    USERS.map(u => u.id > maxIndex ? maxIndex = u.id : maxIndex = maxIndex);
+    return ++maxIndex;
   }
 }

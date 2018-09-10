@@ -1,25 +1,56 @@
-<div class="col-md-6">
-  <h2> User Details</h2>
-  <button class="btn btn-danger" (click)="addUser()"> Add User</button>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th class="hidden">Id</th>
-      <th>FirstName</th>
-      <th>LastName</th>
-      <th>Email</th>
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of users">
-      <td class="hidden">{{user.id}}</td>
-      <td>{{user.firstName}}</td>
-      <td>{{user.lastName}}</td>
-      <td>{{user.email}}</td>
-      <td><button class="btn btn-danger" (click)="deleteUser(user)"> Delete</button>
-        <button class="btn btn-danger" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button></td>
-    </tr>
-    </tbody>
-  </table>
-</div>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span><img src="../../assets/devglan.png"></span>
+    <span class="example-fill-remaining-space"></span>
+    <span class="example-spacer"></span>
+
+    <button mat-button>About</button>
+    <button mat-button>Contact</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-card class="example-card-full">
+  <mat-card-header>
+    <mat-card-title>
+      <h2>User Details</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+  </mat-card-content>
+
+  <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.firstName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.lastName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          <button mat-raised-button (click)="deleteUser(element.id)" color="primary">Delete</button>&nbsp;&nbsp;
+          <button mat-raised-button (click)="editUser(element.id)" color="primary">Edit</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <br><br>
+  <button mat-raised-button (click)="addUser()" color="primary">Add User</button>
+</mat-card>

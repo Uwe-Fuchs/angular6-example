@@ -9,24 +9,28 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-card class="example-card">
+<mat-card class="example-card-small">
   <mat-card-header>
-    <mat-card-title>Login</mat-card-title>
+    <mat-card-title>
+      <h2>Login</h2>
+    </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form class="example-form">
+    <form class="example-form" (keyup.enter)="login()">
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td>
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+              <input matInput placeholder="Username" [(ngModel)]="username" type="text" name="username" required>
             </mat-form-field>
           </td>
         </tr>
         <tr>
-          <td><mat-form-field class="example-full-width">
-            <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
-          </mat-form-field></td>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+            </mat-form-field>
+          </td>
         </tr>
       </table>
       <div *ngIf="invalidLogin" class="error">

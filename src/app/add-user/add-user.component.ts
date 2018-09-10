@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { UserService } from "../service/user.service";
+import { User } from "../model/user";
 
 
 @Component({
@@ -10,27 +10,29 @@ import { UserService } from "../service/user.service";
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css']
 })
-export class AddUserComponent implements OnInit {
+export class AddUserComponent {
+  
+  firstName: string;
+  lastName: string;
+  email: string;
+  invalidData: boolean = false;
 
-  constructor(private formBuilder: FormBuilder,private router: Router, private userService: UserService) { 
+  constructor(private router: Router, private userService: UserService) { 
   }
 
-  addForm: FormGroup;
+  create(): void {
+    let user = new User();
+    user.firstName = this.firstName.trim();
+    user.lastName = this.lastName.trim();
+    user.email = this.email.trim();
 
-  ngOnInit(): void {
-    this.addForm = this.formBuilder.group({
-      id: [],
-      email: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required]
-    });
+    if (!user.firstName || !user.lastName || !user.email) {
+      this.invalidData = true;
+      return; 
+    }
+
+    this.userService
+      .createUser(user)
+      .subscribe(data => this.router.navigate(['list-user']));
   }
-
-  onSubmit(): void {
-    this.userService.createUser(this.addForm.value)
-      .subscribe( data => {
-        this.router.navigate(['list-user']);
-      });
-  }
-
 }

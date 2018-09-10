@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +12,11 @@ export class LoginComponent {
   password: string;
   invalidLogin: boolean = false;
 
-  constructor(private router: Router, public dialog: MatDialog) {
+  constructor(private router: Router) {
   }
 
-  login(): void {
-    
-    if (this.username == 'dhiraj@gmail.com' && this.password == 'password') {
+  login(): void {    
+    if (this.username == 'admin' && this.password == 'admin') {
       this.router.navigate(['list-user']);
     } else {
       this.invalidLogin = true;

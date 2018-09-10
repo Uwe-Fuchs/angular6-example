@@ -1,1 +1,22 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.example-icon {
+    padding: 0 14px;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .example-card-full {
+    margin: 10% auto;
+  }
+  
+  .example-card-small {
+    width: 400px;
+    margin: 10% auto;
+  }
+  
+  .mat-card-title{
+    font-size: 16px;
+  }
