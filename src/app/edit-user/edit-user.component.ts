@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { first } from "rxjs/operators";
 
 import { User } from "../model/user";
@@ -14,45 +14,36 @@ import { UserService } from "../service/user.service";
 export class EditUserComponent implements OnInit {
 
   user: User;
-  editForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,private router: Router, private userService: UserService) { 
+  constructor(private router: Router, private userService: UserService, private location: Location) { 
   }
 
   ngOnInit(): void {
 
     let userId = localStorage.getItem("editUserId");
 
-    if(!userId) {
+    if (!userId) {
       alert("Invalid action.")
       this.router.navigate(['list-user']);
       return;
     }
 
-    this.editForm = this.formBuilder.group({
-      id: [],
-      email: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required]
-    });
-
-    this.userService.getUserById(+userId)
-      .subscribe( data => {
-        this.editForm.setValue(data);
-    });
+    this.userService
+      .getUserById(+userId)
+      .subscribe(user => this.user = user);
   }
 
-  onSubmit() {
-
-    this.userService.updateUser(this.editForm.value)
+  save(): void {
+    this.userService
+      .updateUser(this.user)
       .pipe(first())
       .subscribe(
-        data => {
-          this.router.navigate(['list-user']);
-        },
-        error => {
-          alert(error);
-        });
-    }
+        data => this.router.navigate(['list-user']),
+        error =>alert(error)
+      );
+  }
 
+  goBack(): void {
+    this.location.back();
+  }
 }
