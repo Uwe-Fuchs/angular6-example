@@ -13,6 +13,7 @@ import { ListUserComponent } from './list-user/list-user.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from "./material.module";
 import { UserService } from "./service/user.service";
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { UserService } from "./service/user.service";
     LoginComponent,
     AddUserComponent,
     EditUserComponent,
-    ListUserComponent
+    ListUserComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,7 @@ import { UserService } from "./service/user.service";
     MaterialModule,
     AppRoutingModule
   ],
+  entryComponents: [ErrorDialogComponent],
   providers: [UserService],
   bootstrap: [AppComponent]
 })

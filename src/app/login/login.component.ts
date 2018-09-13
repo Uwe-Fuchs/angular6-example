@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { MatDialog } from "@angular/material";
+import { ErrorDialogComponent } from "../error-dialog/error-dialog.component";
 
 @Component({
   selector: 'app-login',
@@ -10,16 +12,21 @@ export class LoginComponent {
 
   username: string;
   password: string;
-  invalidLogin: boolean = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public dialog : MatDialog) {
   }
 
   login(): void {    
     if (this.username == 'admin' && this.password == 'admin') {
       this.router.navigate(['list-user']);
     } else {
-      this.invalidLogin = true;
+      this.showError("Invalid credentials");
     }
+  }
+
+  showError(error : string) : void {
+    this.dialog.open(ErrorDialogComponent, {
+      data: {errorMsg: error}, width : '250px'
+    });
   }
 }
