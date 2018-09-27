@@ -8,13 +8,12 @@
     flex: 1 1 auto;
   }
   
-  .example-card-full {
-    margin: 10% auto;
+  .example-card {
+    margin: 5% auto;
   }
   
   .example-card-small {
     width: 400px;
-    margin: 10% auto;
   }
   
   .mat-card-title{
