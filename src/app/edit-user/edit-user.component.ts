@@ -14,6 +14,7 @@ import { UserService } from "../service/user.service";
 export class EditUserComponent implements OnInit {
 
   user: User;
+  invalidData: boolean = false;
 
   constructor(private router: Router, private userService: UserService, private location: Location) { 
   }
@@ -34,6 +35,11 @@ export class EditUserComponent implements OnInit {
   }
 
   save(): void {
+    if (!this.user.firstName || !this.user.lastName || !this.user.email) {
+      this.invalidData = true;
+      return; 
+    }
+
     this.userService
       .updateUser(this.user)
       .pipe(first())
