@@ -6,7 +6,7 @@ import { USERS } from "./mock-users";
 
 @Injectable()
 export class UserService {
-  private baseUrl: string = 'http://localhost:8080/user-portal/users';
+  private baseUrl: string = 'http://localhost:8080/user-crud-service/webapi/users';
 
   constructor() { }
 
@@ -28,7 +28,6 @@ export class UserService {
   }
 
   updateUser(user: User): Observable<User> {
-    USERS.splice(user.id, 1, user);
     return of(user);
     // return this.http.put(this.baseUrl + '/' + user.id, user);
   }
