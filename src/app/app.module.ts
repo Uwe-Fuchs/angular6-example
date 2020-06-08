@@ -13,6 +13,7 @@ import { ListUserComponent } from './list-user/list-user.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from "./material.module";
 import { UserService } from "./service/user.service";
+import { AuthService } from "./service/auth.service";
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 
@@ -35,7 +36,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     AppRoutingModule
   ],
   entryComponents: [ErrorDialogComponent],
-  providers: [UserService],
+  providers: [UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
